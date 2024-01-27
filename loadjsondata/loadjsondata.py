@@ -17,13 +17,13 @@ Returns:
     
 """
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 import json
 from pathlib import Path
 
 
-def load_json(json_path: Path, default_data=None):
+def loadjson(json_path: Path, default_data=None):
     """Checks to see if a json file exists at json_path, and returns a
     python data type of the contents read from the json file. If the
     json file doesn't exist, outputs json file using the python data
