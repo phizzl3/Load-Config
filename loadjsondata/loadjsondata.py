@@ -17,7 +17,7 @@ Returns:
     
 """
 
-__version__ = "1.0.1"
+__version__ = "1.0.2"
 
 import json
 from pathlib import Path
@@ -50,7 +50,7 @@ def loadjson(json_path: Path, default_data=None):
         if default_data:
             # Writes the python data to output json file.
             with open(json_path, "w", encoding="utf-8") as json_file:
-                json.dump(default_data, json_file, indent=4)
+                json.dump(default_data, json_file, indent=2)
         else:
             input(f"\n File not found:\n {json_path}")
 
