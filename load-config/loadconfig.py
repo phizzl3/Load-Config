@@ -3,7 +3,7 @@ This module provides functionality to load and manage JSON configuration files.
 It includes functions to verify paths, write default data, and load data from JSON files.
 """
 
-__version__ = "1.1.0"
+__version__ = "1.2.0"
 
 import json
 import time
