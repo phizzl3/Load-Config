@@ -46,4 +46,3 @@ CONFIG2 = load_config(json_path=JSON, default_data=DEFAULTS)
 if __name__ == "__main__":
     print("CONFIG:", CONFIG)
     print("CONFIG2:", CONFIG2)
-    

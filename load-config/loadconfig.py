@@ -10,16 +10,33 @@ import time
 from pathlib import Path
 from typing import Any, Optional
 
+# Content for the README file that will be created alongside the JSON configuration file
 README_CONTENT = """
-Template for loading JSON configuration data with default values.
-This module serves as a template for loading configuration data from a JSON file.
-It checks if the specified JSON file exists, and if not, it creates the file with default
-data. The loaded configuration data is then processed to generate a configuration dictionary
-that can be imported and used in other parts of the application.
-Update the JSON file path, default values, and the processing logic to suit your specific
-configuration needs.
-To revert to the original template, simply replace the contents of this module with the original
-template code provided in the README.
+# Configuration Guide
+
+This folder contains the application's configuration file (`config.json`), 
+which is pre-populated with **default values** to help you get started quickly.
+
+## Customizing Your Settings
+
+To tailor the application to your specific environment, please open the 
+configuration file and update the values with your correct parameters. 
+
+**Important:** When modifying the file, be careful to maintain the correct 
+**JSON formatting** (e.g., proper commas, quotation marks, and nested brackets). 
+An invalid JSON structure will cause the application to fail on startup.
+
+## Resetting to Defaults
+
+If you encounter issues with your custom settings, or if you simply want to start 
+over from scratch, you can easily revert to the original configuration:
+
+1. **Close** the application if it is currently running.
+2. **Delete** the existing configuration file from this folder.
+3. **Run** the application again. 
+
+The application will detect that the file is missing, automatically regenerate 
+a fresh configuration file with all default values, and proceed to launch.
 """
 
 
@@ -64,7 +81,7 @@ def _write_default_data(json_path: Path, default_data: Any) -> None:
     """
     with open(json_path, "w", encoding="utf-8") as json_file:
         json.dump(default_data, json_file, indent=2)
-    
+
     # Also write a README file in the same directory to explain the purpose of the JSON file
     with open(json_path.parent / "README.txt", "w", encoding="utf-8") as readme_file:
         readme_file.write(README_CONTENT)
@@ -83,10 +100,12 @@ def _verify_or_write_json(json_path: Path, default_data: Optional[Any] = None) -
             json_path.parent.mkdir(parents=True)
 
         if default_data:
-            print(f"\n JSON file not found. Creating file with default data:\n {json_path}\n")
+            print(
+                f"\n JSON file not found. Creating file with default data:\n {json_path}\n"
+            )
             time.sleep(2)
             _write_default_data(json_path, default_data)
-            
+
         else:
             print(f"\n File not found:\n {json_path}")
             time.sleep(5)
