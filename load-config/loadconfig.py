@@ -10,6 +10,18 @@ import time
 from pathlib import Path
 from typing import Any, Optional
 
+README_CONTENT = """
+Template for loading JSON configuration data with default values.
+This module serves as a template for loading configuration data from a JSON file.
+It checks if the specified JSON file exists, and if not, it creates the file with default
+data. The loaded configuration data is then processed to generate a configuration dictionary
+that can be imported and used in other parts of the application.
+Update the JSON file path, default values, and the processing logic to suit your specific
+configuration needs.
+To revert to the original template, simply replace the contents of this module with the original
+template code provided in the README.
+"""
+
 
 def load_config(json_path: Path, default_data: Optional[Any] = None) -> Any:
     """
@@ -52,6 +64,10 @@ def _write_default_data(json_path: Path, default_data: Any) -> None:
     """
     with open(json_path, "w", encoding="utf-8") as json_file:
         json.dump(default_data, json_file, indent=2)
+    
+    # Also write a README file in the same directory to explain the purpose of the JSON file
+    with open(json_path.parent / "README.txt", "w", encoding="utf-8") as readme_file:
+        readme_file.write(README_CONTENT)
 
 
 def _verify_or_write_json(json_path: Path, default_data: Optional[Any] = None) -> None:
