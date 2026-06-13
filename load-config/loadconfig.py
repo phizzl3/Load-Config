@@ -67,7 +67,10 @@ def _verify_or_write_json(json_path: Path, default_data: Optional[Any] = None) -
             json_path.parent.mkdir(parents=True)
 
         if default_data:
+            print(f"\n JSON file not found. Creating file with default data:\n {json_path}\n")
+            time.sleep(2)
             _write_default_data(json_path, default_data)
+            
         else:
             print(f"\n File not found:\n {json_path}")
             time.sleep(5)
