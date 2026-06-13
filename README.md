@@ -1,62 +1,89 @@
 # Load-Config
 
-Load-Config is a Python utility that checks for the existence of a JSON configuration file at a specified path and returns the contents as a Python data type. If the JSON file does not exist, it creates the file using optionally provided default data and then loads the data from the file.
+Load-Config is a Python utility that loads JSON configuration data and creates the file automatically with default values when it does not exist. It also writes a helper `README.txt` alongside the generated JSON file to explain the configuration purpose.
+
+## Repository Layout
+
+- `load-config/loadconfig.py`: Main loader implementation.
+- `load-config/configuration.py`: Sample module showing how to import and use `load_config`.
+- `sample/config.json`: Sample JSON configuration file.
+- `README.md`: Project documentation.
 
 ## Features
 
 - Load configuration data from a JSON file.
-- Automatically create a JSON file with default data if it does not exist.
-- Simple and easy-to-use interface.
+- Automatically create a missing JSON file using provided default data.
+- Generate a companion `README.txt` in the configuration folder with usage instructions.
+- Works with Python standard library only.
 
 ## Installation
 
-To install Load-Config, simply clone the repository and install the required dependencies:
+Clone the repository. No external dependencies are required.
 
 ```sh
-git clone https://github.com/yourusername/load-config.git
+git clone https://github.com/yourusername/Load-Config.git
+cd Load-Config
+```
+
+## Getting Started
+
+1. Open a terminal in the repository root.
+2. Run the sample configuration module from the `load-config` folder:
+
+```sh
 cd load-config
-pip install -r requirements.txt
+python configuration.py
+```
+
+3. If the configured JSON file does not exist, `load_config()` will create it with default values and write a companion `README.txt` in the same folder.
+4. Edit the generated JSON file to update your settings, then rerun the sample module or import `load_config` from your own application.
+
+To use the loader directly from the `load-config` module, either run from that directory or include it on `PYTHONPATH`.
+
+```sh
+cd load-config
+python -c "from loadconfig import load_config; from pathlib import Path; print(load_config(Path('sample/config.json')) )"
+```
+
+Or from the repository root:
+
+```sh
+PYTHONPATH=./load-config python -c "from loadconfig import load_config; from pathlib import Path; print(load_config(Path('sample/config.json')) )"
 ```
 
 ## Usage
 
 ```py
-import loadconfig
 from pathlib import Path
+from loadconfig import load_config
 
-# Define the path to the JSON configuration file
-json_path = Path("/Volumes/USB/config.json")
+json_path = Path.home() / 'PyAppFiles' / 'My Application' / 'config.json'
 
-# Optionally, define default data to be written if the file does not exist
 default_data = {
-    "setting1": "value1",
-    "setting2": "value2"
+    'random number': 20,
+    'working folder name': 'My Folder',
+    'output file name': 'Output.txt',
 }
 
-# Load the configuration data
-config_data = loadconfig.load_config(json_path, default_data)
-
-# Access the configuration data
-print(config_data["setting1"])
+config_data = load_config(json_path, default_data=default_data)
+print(config_data['random number'])
 ```
 
-## Arguments
+## Behavior
 
-- `json_path` (Path): `pathlib.Path` pointing to the JSON file location.
-- `default_data` (any, optional): Python data type (JSON compatible) to output to the JSON file. Defaults to `None`.
-
-## Returns
-
-- `any`: Python data type read from the JSON data.
-
-## Sample Package Text
-
-This program will attempt to load some of the values required to run from a file located at *~/PyAppFiles/MyApp/config.json* (sample file located in the package *json* folder). If the file isn’t found in the specified folder, the program will generate a file at that location with default values at runtime. This file’s values will need to be updated with the correct data in order for the program to run correctly, i.e., not crash.
+- If the JSON file exists, `load_config()` reads and returns the contents.
+- If the JSON file is missing and `default_data` is provided, the function creates the file and writes the default data.
+- If the JSON file is missing, `load_config()` also creates `README.txt` in the same folder to explain how to update the generated configuration.
 
 ## Sample Files
 
-Sample `config.py` file and JSON file located in `/samples`.
+- `load-config/configuration.py`: Example sample module that loads JSON configuration and builds a `CONFIG` dictionary.
+- `sample/config.json`: Example configuration file with default values.
+
+## Notes
+
+The loader is implemented as a plain module in `load-config/loadconfig.py`, so import it as `from loadconfig import load_config` when `load-config/` is available on your Python path.
 
 ## License
 
-This project is licensed under the MIT License. See the `LICENSE` file for more details.
+This project is licensed under the MIT License. See the `LICENSE` file for details.
