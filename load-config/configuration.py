@@ -41,3 +41,9 @@ CONFIG = {
 
 # TODO Or just load the config JSON data without modification (OR Import this)
 CONFIG2 = load_config(json_path=JSON, default_data=DEFAULTS)
+
+# Example usage/test of the configuration data
+if __name__ == "__main__":
+    print("CONFIG:", CONFIG)
+    print("CONFIG2:", CONFIG2)
+    
