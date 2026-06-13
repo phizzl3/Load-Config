@@ -12,7 +12,7 @@ configuration data.
 from pathlib import Path
 
 # TODO Import the load_config function from its relative path
-from .loadconfig import load_config
+from loadconfig import load_config
 
 # TODO Update to your desired JSON file location
 JSON = Path().home() / "PyAppFiles" / "My Application" / "config.json"
