@@ -15,7 +15,7 @@ from pathlib import Path
 from loadconfig import load_config
 
 # TODO Update to your desired JSON file location
-JSON = Path().home() / "PyAppFiles" / "My Application" / "config.json"
+JSON = Path().home() / "PyAppFiles" / "My Application" / "configuration.json"
 
 # TODO Update to your Default values for your JSON data
 DEFAULTS = {
