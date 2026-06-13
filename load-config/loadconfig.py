@@ -22,12 +22,12 @@ def load_config(json_path: Path, default_data: Optional[Any] = None) -> Any:
     Returns:
         Any: The data loaded from the JSON file.
     """
-    json_path = __verify_path_object(json_path)
-    __verify_or_write_json(json_path, default_data)
-    return __load_data_from_json(json_path)
+    json_path = _verify_path_object(json_path)
+    _verify_or_write_json(json_path, default_data)
+    return _load_data_from_json(json_path)
 
 
-def __verify_path_object(json_path: Path) -> Path:
+def _verify_path_object(json_path: Path) -> Path:
     """
     Verify that the given path is a Path object. If not, convert it to a Path object.
 
@@ -42,7 +42,7 @@ def __verify_path_object(json_path: Path) -> Path:
     return json_path
 
 
-def __write_default_data(json_path: Path, default_data: Any) -> None:
+def _write_default_data(json_path: Path, default_data: Any) -> None:
     """
     Write default data to a JSON file.
 
@@ -54,7 +54,7 @@ def __write_default_data(json_path: Path, default_data: Any) -> None:
         json.dump(default_data, json_file, indent=2)
 
 
-def __verify_or_write_json(json_path: Path, default_data: Optional[Any] = None) -> None:
+def _verify_or_write_json(json_path: Path, default_data: Optional[Any] = None) -> None:
     """
     Verify if a JSON file exists. If not, create the file with default data or print a file not found message.
 
@@ -67,13 +67,13 @@ def __verify_or_write_json(json_path: Path, default_data: Optional[Any] = None) 
             json_path.parent.mkdir(parents=True)
 
         if default_data:
-            __write_default_data(json_path, default_data)
+            _write_default_data(json_path, default_data)
         else:
             print(f"\n File not found:\n {json_path}")
             time.sleep(5)
 
 
-def __load_data_from_json(json_path: Path) -> Any:
+def _load_data_from_json(json_path: Path) -> Any:
     """
     Load data from a JSON file.
 
